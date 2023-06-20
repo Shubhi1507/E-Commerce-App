@@ -1,0 +1,5 @@
+steps to fix android build issues
+
+1.goto android folder,  clean build folder -> ./gradlew clean build || ./gradlew clean task || ./gradlew clean
+2. build gradle -> gradlew build || ./gradlew clean build 
+3. if successfully build , run -> npm run android
