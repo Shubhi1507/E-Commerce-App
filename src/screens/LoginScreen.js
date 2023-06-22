@@ -1,11 +1,20 @@
-import {View, Text, TextInput, Button} from 'react-native';
-import React, {useState} from 'react';
-import {regex} from '../utils/regex.utils';
+import {View, Text, TextInput, Button, TouchableOpacity} from 'react-native';
+import React, {useEffect, useState} from 'react';
 
-export default function LoginScreen() {
+import {regex} from '../utils/regex.utils';
+import {ROUTES} from '../navigation/route.constant';
+import {useSelector} from 'react-redux';
+
+export default function LoginScreen(props) {
+  console.log(props);
   const [Email, setEmail] = useState('');
   const [password, usepassword] = useState('');
   const [error, Seterror] = useState('');
+
+  const Store = useSelector(store => store);
+  useEffect(() => {
+    console.log(Store);
+  }, []);
 
   function Submit() {}
   const validate = () => {
@@ -25,6 +34,9 @@ export default function LoginScreen() {
     } else Seterror('');
   };
 
+  function Navigate() {
+    props.navigation.navigate(ROUTES.SIGNUPSCREEN);
+  }
   return (
     <View
       style={{
@@ -47,9 +59,11 @@ export default function LoginScreen() {
         defaultValue={password}
         secureTextEntry={true}
       />
-
       <Button title="SUBMIT" onPress={() => validate()} />
       <Text style={{color: 'orange', fontSize: 30}}>{error}</Text>
+      <TouchableOpacity onPress={() => Navigate()}>
+        <Text>Create an account</Text>
+      </TouchableOpacity>
     </View>
   );
 }
