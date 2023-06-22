@@ -10,6 +10,7 @@ import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
 import java.util.List;
 import androidx.multidex.MultiDexApplication;
+import io.invertase.firebase.auth.ReactNativeFirebaseAuthPackage;
 
 public class MainApplication extends MultiDexApplication implements ReactApplication {
 
