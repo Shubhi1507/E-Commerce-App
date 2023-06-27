@@ -20,16 +20,18 @@ function Signup() {
       console.error(error);
     });
 }
-async function AuthLogin() {
+async function AuthLogin(email, password) {
   try {
-    const response = await auth().signInWithEmailAndPassword(
-      'ss@gmail.com',
-      '123456',
+    const userCredential = await auth().signInWithEmailAndPassword(
+      email,
+      password,
     );
-    console.log(response);
-  } catch (error) {
-    console.log(error);
+
+    console.log(userCredential.user.toJSON());
+    return userCredential.user.toJSON();
+  } catch (e) {
+    console.log(e.code, 'ok', e.message);
+    Alert.alert(e.code, e.message);
   }
 }
-
 export {Signup, AuthLogin};

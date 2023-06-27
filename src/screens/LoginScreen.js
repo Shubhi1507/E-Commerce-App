@@ -4,6 +4,7 @@ import React, {useEffect, useState} from 'react';
 import {regex} from '../utils/regex.utils';
 import {ROUTES} from '../navigation/route.constant';
 import {useSelector} from 'react-redux';
+import {AuthLogin} from '../api/auth';
 
 export default function LoginScreen(props) {
   console.log(props);
@@ -17,7 +18,7 @@ export default function LoginScreen(props) {
   }, []);
 
   function Submit() {}
-  const validate = () => {
+  const validate = async () => {
     if (!Email) {
       return Seterror('Please enter email');
     }
@@ -32,6 +33,13 @@ export default function LoginScreen(props) {
     if (password.length < 6) {
       return Seterror('Password must be six characters long ');
     } else Seterror('');
+
+    const data = await AuthLogin(Email, password);
+    console.log(data);
+
+    if (data) {
+      //add redux logic here
+    }
   };
 
   function Navigate() {

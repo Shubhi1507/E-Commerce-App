@@ -12,7 +12,7 @@ function AuthReducer(state=initialState, action) {
       return {...state};
 
     default:
-      return {};
+      return {...state};
   }
 }
 export default AuthReducer;
