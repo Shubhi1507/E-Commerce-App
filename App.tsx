@@ -11,31 +11,86 @@ import SignupScreen from './src/screens/SignupScreen';
 import WelcomeScreen from './src/screens/welcomescreen';
 import {Provider} from 'react-redux';
 import Configurestore from './src/redux/store/store';
+import {Alert} from 'react-native';
+import messaging from '@react-native-firebase/messaging';
 import {PersistGate} from 'redux-persist/integration/react';
+import {
+  check,
+  PERMISSIONS,
+  request,
+  requestNotifications,
+} from 'react-native-permissions';
+import {checkNotifications} from 'react-native-permissions';
 
 const {store, persistor} = Configurestore();
 
 const Stack = createNativeStackNavigator();
 
-function App(): JSX.Element {
+function App() {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
 
-  function onAuthStateChanged(user: any) {
+  async function onAuthStateChanged(user: any) {
     setUser(user);
+    console.log('xyz', await user);
     if (initializing) setInitializing(false);
+
+    checkNotifications().then(({status, settings}) => {
+      console.log('okokokokokookolkmn', status, settings);
+
+      if (status == 'denied') {
+        requestNotifications(['alert', 'sound']).then(({status, settings}) => {
+          console.log('Request access -----', status, settings);
+        });
+      } else {
+        console.log('Request Permission ------>>> ', status);
+      }
+    });
   }
 
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    console.log('sub->', subscriber);
     return subscriber; // unsubscribe on unmount
   }, []);
 
-  const isDarkMode = useColorScheme() === 'dark';
+  useEffect(() => {
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    });
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    return unsubscribe;
+  }, []);
+
+  useEffect(() => {
+    checkNotificationPermission();
+    const ABC = messaging().onNotificationOpenedApp(remoteMessage => {
+      console.log(
+        'App opened by notification while in foreground:',
+        JSON.stringify(remoteMessage),
+      );
+    });
+
+    return ABC;
+  }, []);
+
+  useEffect(() => {
+    requestNotificationPermission();
+    const ABC = messaging().setBackgroundMessageHandler(async remoteMessage => {
+      console.log(
+        'App opened by notification while in background:',
+        JSON.stringify(remoteMessage),
+      );
+    });
+  }, []);
+
+  const requestNotificationPermission = async () => {
+    // const result = await request(PERMISSIONS.ANDROID);
+    // console.log(result)
+    // return result;
+  };
+  const checkNotificationPermission = async () => {
+    // const result = await check(PERMISSIONS.ANDROID.RECEIVE_WAP_PUSH);
+    // return result;
   };
 
   return (

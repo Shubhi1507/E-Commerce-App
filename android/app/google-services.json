@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "1000791722227",
     "project_id": "e-commerce-app-966ca",
-    "storage_bucket": "e-commerce-app-966ca.appspot.com"
+    "storage_bucket": "e-commerce-app-966ca.firebasestorage.app"
   },
   "client": [
     {
@@ -14,7 +14,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "1000791722227-ajbnh1v2otqrfta7c70tquer5cst20va.apps.googleusercontent.com",
+          "client_id": "1000791722227-167qg952vmf12ou947vk52e3874779mg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,7 +27,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1000791722227-ajbnh1v2otqrfta7c70tquer5cst20va.apps.googleusercontent.com",
+              "client_id": "1000791722227-167qg952vmf12ou947vk52e3874779mg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

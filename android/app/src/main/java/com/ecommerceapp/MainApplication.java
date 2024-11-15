@@ -11,7 +11,7 @@ import com.facebook.soloader.SoLoader;
 import java.util.List;
 import androidx.multidex.MultiDexApplication;
 import io.invertase.firebase.auth.ReactNativeFirebaseAuthPackage;
-
+import io.invertase.firebase.messaging.ReactNativeFirebaseMessagingPackage;
 public class MainApplication extends MultiDexApplication implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =

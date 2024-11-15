@@ -2,14 +2,14 @@ import {ACTION_CONSTANTS} from '../action/action';
 
 let initialState = {isloggedIn: false, userdata: null};
 
-function AuthReducer(state=initialState, action) {
-  console.log(action)
+function AuthReducer(state = initialState, action) {
+  console.log(action);
   switch (action.type) {
     case ACTION_CONSTANTS.LOGIN_REQUEST:
       return state;
 
     case ACTION_CONSTANTS.LOGIN_SUCCESS:
-      return {...state};
+      return { isloggedIn: true, userdata: action.payload};
 
     default:
       return {...state};
